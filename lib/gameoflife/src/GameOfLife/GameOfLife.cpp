@@ -1,7 +1,7 @@
 #include <iostream>
 #include "include/GameOfLife.h"
 
-Position::Position(int column, int row){
+Position::Position(Column column, Row row){
     this->column = column;
     this->row = row;
 }
@@ -28,7 +28,7 @@ void Board::SetCellState(Position position, CellState){
 
 std::list<Position> Board::GetLivingCellsPositions(){
     std::list<Position> list;
-    list.push_back(Position(4, 4));
+    list.push_back(Position(FourthColumn, FourthRow));
     
     return list;
 }

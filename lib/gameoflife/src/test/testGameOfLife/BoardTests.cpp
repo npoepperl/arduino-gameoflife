@@ -19,7 +19,7 @@ TEST_F(BoardTests, AssertThatNewBoardIsEmpty){
 TEST_F(BoardTests, AssertThatBoardWithLivingCellIsNotEmpty){
     Board board = Board();
 
-    Position position(4, 4);
+    Position position(FourthColumn, FourthRow);
     board.SetCellState(position, Alive);
 
     ASSERT_EQ(true, board.HasLivingCells());
@@ -28,7 +28,7 @@ TEST_F(BoardTests, AssertThatBoardWithLivingCellIsNotEmpty){
 TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
     Board board = Board();
 
-    Position position(4, 4);
+    Position position(FourthColumn, FourthRow);
 
     board.SetCellState(position, Alive);
 
@@ -43,13 +43,13 @@ TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
 
 TEST_F(BoardTests, AssertThatCellIsDead){
     Board board = Board();
-    ASSERT_EQ(Dead, board.GetCellState(Position(3, 3)));
+    ASSERT_EQ(Dead, board.GetCellState(Position(ThirdColumn, ThirdRow)));
 }
 
 TEST_F(BoardTests, AssertThatTheStateOfOneCellCanBeSetAndRetreived){
     Board board = Board();
 
-    Position position(3, 3);
+    Position position(ThirdColumn, ThirdRow);
     board.SetCellState(position, Alive);
 
     ASSERT_EQ(Alive, board.GetCellState(position));
@@ -59,10 +59,10 @@ TEST_F(BoardTests, AssertThatTheStateOfMultipleCellCanBeSetAndRetreived){
     Board board = Board();
 
     std::list<Position> positions;
-    positions.push_back(Position(1, 3));
-    positions.push_back(Position(3, 3));
-    positions.push_back(Position(5, 7));
-    positions.push_back(Position(3, 7));
+    positions.push_back(Position(FirstColumn, ThirdRow));
+    positions.push_back(Position(ThirdColumn, ThirdRow));
+    positions.push_back(Position(FifthColumn, SeventhRow));
+    positions.push_back(Position(FifthColumn, EighthRow));
 
     for(std::list<Position>::iterator iter = positions.begin(); iter != positions.end(); iter++){
         board.SetCellState(*iter, Alive);

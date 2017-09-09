@@ -1,23 +1,46 @@
 #include "BoardTests.h"
 #include "GameOfLife.h"
 
+enum CellState{
+    Dead = 1,
+    Alive = 2
+};
+
+class Position{
+public:
+    Position(int xCoordinate, int yCoordinate){
+        this->xCoordinate = xCoordinate;
+        this->yCoordinate = yCoordinate;
+    }
+
+    int xCoordinate;
+    int yCoordinate;
+};
+
 class Board{
 public:
     Board(){
-
+        setWasCalled = false;
     }
 
     ~Board(){
 
     }
 
-    void SetCellState(int, int, bool){
-
+    void SetCellState(Position &position, CellState){
+        setWasCalled = true;
     }
 
-    bool GetCellState(int, int){
-        return true;
+    bool GetCellState(int x, int y){
+        if(setWasCalled == true){
+            return true;
+        }
+
+        return false;
     }
+
+private:
+    bool setWasCalled;
 };
 
 BoardTests::BoardTests(){
@@ -37,7 +60,8 @@ TEST_F(BoardTests, GetCellState){
 TEST_F(BoardTests, SetAndGetCellState){
     Board board = Board();
 
-    board.SetCellState(3, 3, true);
+    Position position(3, 3);
+    board.SetCellState(position, Alive);
 
     ASSERT_EQ(true, board.GetCellState(3, 3));
 }

@@ -68,5 +68,18 @@ TEST_F(BoardTests, AssertThatTheStateOfMultipleCellCanBeSetAndRetreived){
         board.SetCellState(*iter, Alive);
         ASSERT_EQ(Alive, board.GetCellState(*iter));
     }
+}
 
+TEST_F(BoardTests, AssertThatRowOfEmptyBoardIsEmpty){
+    Board board = Board();
+    
+    ASSERT_EQ(0b00000000, board.GetRowAsByte(FirstRow));
+}
+
+TEST_F(BoardTests, AssertThatByteValueOfRowMatchesSetCellStates){
+    Board board = Board();
+
+    board.SetCellState(Position(ThirdColumn, FirstRow), Alive);
+
+    ASSERT_EQ(0b00100000, board.GetRowAsByte(FirstRow));
 }

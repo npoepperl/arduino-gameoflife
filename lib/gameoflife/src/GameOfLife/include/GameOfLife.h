@@ -46,9 +46,12 @@ public:
 
     std::list<Position> GetLivingCellsPositions();
 
-    void SetCellState(Position position, CellState);
+    void SetCellState(Position position, CellState cellState);
     CellState GetCellState(Position position);
 
+    unsigned char GetRowAsByte(Row row);
 private:
     bool setWasCalled;
+
+    unsigned char row;
 };

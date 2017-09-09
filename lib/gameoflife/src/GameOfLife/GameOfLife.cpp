@@ -13,6 +13,7 @@ bool Position::operator==(const Position &other){
 
 Board::Board(){
     setWasCalled = false;
+    row = 0;
 }
 
 Board::~Board(){
@@ -22,8 +23,12 @@ bool Board::HasLivingCells(){
     return setWasCalled;
 }
 
-void Board::SetCellState(Position position, CellState){
+void Board::SetCellState(Position position, CellState cellState){
     setWasCalled = true;
+
+    if(cellState == Alive){
+        row |= (0b10000000 >> position.column);
+    }
 }
 
 std::list<Position> Board::GetLivingCellsPositions(){
@@ -39,4 +44,8 @@ CellState Board::GetCellState(Position position){
     }
 
     return Dead;
+}
+
+unsigned char Board::GetRowAsByte(Row row){
+    return this->row;
 }

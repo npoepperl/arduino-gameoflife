@@ -22,7 +22,7 @@ bool Board::HasLivingCells(){
     return setWasCalled;
 }
 
-void Board::SetCellState(Position &position, CellState){
+void Board::SetCellState(Position position, CellState){
     setWasCalled = true;
 }
 
@@ -33,7 +33,7 @@ std::list<Position> Board::GetLivingCellsPositions(){
     return list;
 }
 
-CellState Board::GetCellState(int x, int y){
+CellState Board::GetCellState(Position position){
     if(setWasCalled == true){
         return Alive;
     }

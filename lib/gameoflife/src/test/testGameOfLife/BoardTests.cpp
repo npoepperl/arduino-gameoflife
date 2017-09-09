@@ -43,11 +43,20 @@ TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
 
 TEST_F(BoardTests, AssertThatCellIsDead){
     Board board = Board();
-
-    ASSERT_EQ(Dead, board.GetCellState(3, 3));
+    ASSERT_EQ(Dead, board.GetCellState(Position(3, 3)));
 }
 
-TEST_F(BoardTests, SetAndGetCellState){
+TEST_F(BoardTests, AssertThatTheStateOfOneCellCanBeSetAndRetreived){
+    Board board = Board();
+
+    Position position(3, 3);
+    board.SetCellState(position, Alive);
+
+    ASSERT_EQ(Alive, board.GetCellState(position));
+}
+
+/*
+TEST_F(BoardTests, AssertThatTheStateOfOneCellCanBeSetAndRetreived){
     Board board = Board();
 
     Position position(3, 3);
@@ -55,3 +64,4 @@ TEST_F(BoardTests, SetAndGetCellState){
 
     ASSERT_EQ(Alive, board.GetCellState(3, 3));
 }
+*/

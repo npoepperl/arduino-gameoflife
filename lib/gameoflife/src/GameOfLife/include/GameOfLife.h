@@ -24,8 +24,8 @@ public:
 
     std::list<Position> GetLivingCellsPositions();
 
-    void SetCellState(Position &position, CellState);
-    CellState GetCellState(int x, int y);
+    void SetCellState(Position position, CellState);
+    CellState GetCellState(Position position);
 
 private:
     bool setWasCalled;

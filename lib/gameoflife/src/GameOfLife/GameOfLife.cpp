@@ -1,14 +1,24 @@
 #include <iostream>
 #include "include/GameOfLife.h"
 
-ClassUnderTest::ClassUnderTest(){
-
+Position::Position(int xCoordinate, int yCoordinate){
 }
 
-ClassUnderTest::~ClassUnderTest(){
-
+Board::Board(){
+    setWasCalled = false;
 }
 
-void ClassUnderTest::TestFunction(){
-    std::cout << "Hello, World" << std::endl;
+Board::~Board(){
+}
+
+void Board::SetCellState(Position &position, CellState){
+    setWasCalled = true;
+}
+
+bool Board::GetCellState(int x, int y){
+    if(setWasCalled == true){
+        return true;
+    }
+
+    return false;
 }

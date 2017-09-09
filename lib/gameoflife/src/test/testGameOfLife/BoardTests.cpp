@@ -55,13 +55,18 @@ TEST_F(BoardTests, AssertThatTheStateOfOneCellCanBeSetAndRetreived){
     ASSERT_EQ(Alive, board.GetCellState(position));
 }
 
-/*
-TEST_F(BoardTests, AssertThatTheStateOfOneCellCanBeSetAndRetreived){
+TEST_F(BoardTests, AssertThatTheStateOfMultipleCellCanBeSetAndRetreived){
     Board board = Board();
 
-    Position position(3, 3);
-    board.SetCellState(position, Alive);
+    std::list<Position> positions;
+    positions.push_back(Position(1, 3));
+    positions.push_back(Position(3, 3));
+    positions.push_back(Position(5, 7));
+    positions.push_back(Position(3, 7));
 
-    ASSERT_EQ(Alive, board.GetCellState(3, 3));
+    for(std::list<Position>::iterator iter = positions.begin(); iter != positions.end(); iter++){
+        board.SetCellState(*iter, Alive);
+        ASSERT_EQ(Alive, board.GetCellState(*iter));
+    }
+
 }
-*/

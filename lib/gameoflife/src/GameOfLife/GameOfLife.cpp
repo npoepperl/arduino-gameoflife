@@ -33,10 +33,10 @@ std::list<Position> Board::GetLivingCellsPositions(){
     return list;
 }
 
-bool Board::GetCellState(int x, int y){
+CellState Board::GetCellState(int x, int y){
     if(setWasCalled == true){
-        return true;
+        return Alive;
     }
 
-    return false;
+    return Dead;
 }

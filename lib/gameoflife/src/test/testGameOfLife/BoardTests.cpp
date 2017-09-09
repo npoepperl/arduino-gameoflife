@@ -29,7 +29,7 @@ TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
     Board board = Board();
 
     Position position(4, 4);
-    
+
     board.SetCellState(position, Alive);
 
     std::list<Position> living = board.GetLivingCellsPositions();
@@ -41,10 +41,10 @@ TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
     }
 }
 
-TEST_F(BoardTests, GetCellState){
+TEST_F(BoardTests, AssertThatCellIsDead){
     Board board = Board();
 
-    ASSERT_EQ(false, board.GetCellState(3, 3));
+    ASSERT_EQ(Dead, board.GetCellState(3, 3));
 }
 
 TEST_F(BoardTests, SetAndGetCellState){
@@ -53,5 +53,5 @@ TEST_F(BoardTests, SetAndGetCellState){
     Position position(3, 3);
     board.SetCellState(position, Alive);
 
-    ASSERT_EQ(true, board.GetCellState(3, 3));
+    ASSERT_EQ(Alive, board.GetCellState(3, 3));
 }

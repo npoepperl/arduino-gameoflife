@@ -6,15 +6,23 @@ gameOfLifeBuildPath=$gameOfLifeSrcPath"build/"
 
 workingDir=$(pwd)
 
-if [ $1 == "-r" ]; then
+rebuild="no"
+test="no"
+buildSuccessful="no"
+
+while [ "$1" != '' ]
+  do
+    [ $1 == "-r" ] && rebuild="yes" && echo "A rebuild will be performed!" && shift
+    [ $1 == "-t" ] && test="yes" && echo "All tests will be executed after successful build!" && shift
+done
+
+
+if [ $rebuild == "yes" ]; then
     if [ -d $gameOfLifeBuildPath ]; then
-        echo $gameOfLifeBuildPath
         rm -r -f $gameOfLifeBuildPath
     else
-        echo "build existiert nicht"
+        echo "The build-directory doesn't exist."
     fi
-else
-    echo "komisch"
 fi
 
 if [ -d $libDirectory ]; then
@@ -24,10 +32,28 @@ if [ -d $libDirectory ]; then
 
     cd $gameOfLifeBuildPath
 
-    cmake ..
-    make
-else
-    echo "lib directory does not exist ["$libDirectory"]."
+    cmake .. 1> cmake.log 2> /dev/null
+
+    if [ $? -eq 0 ]; then
+        echo "Cmake successfully created buildfiles."
+    else
+        echo "Error creating buildfiles."
+        exit 1
+    fi
+
+    make 1> build.log 2> /dev/null
+
+    if [ $? -eq 0 ]; then
+        echo "Build was successful."
+    else
+        echo "Error building library."
+        exit 1
+    fi
+
+    if [ $test == "yes" ]; then
+        echo "Tests will be executed."
+        ./test/testGameOfLife/gtestRunner
+    fi
 fi
 
 cd $workingDir

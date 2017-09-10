@@ -1,4 +1,4 @@
-#include <iostream>
+#include <string.h>
 #include "include/GameOfLife.h"
 
 Position::Position(Column column, Row row){
@@ -12,40 +12,49 @@ bool Position::operator==(const Position &other){
 }
 
 Board::Board(){
-    setWasCalled = false;
-    row = 0;
+    memset(&rows, 0x00, sizeof(rows));
 }
 
 Board::~Board(){
 }
 
 bool Board::HasLivingCells(){
-    return setWasCalled;
+    for(int row = 0; row < 8; row++){
+        if(rows[row] != 0){
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void Board::SetCellState(Position position, CellState cellState){
-    setWasCalled = true;
-
     if(cellState == Alive){
-        row |= (0b10000000 >> position.column);
+        rows[position.row] |= (0b10000000 >> position.column);
+    }
+    else{
+        rows[position.row] &= ~(0b10000000 >> position.column);
     }
 }
 
 std::list<Position> Board::GetLivingCellsPositions(){
     std::list<Position> list;
-    list.push_back(Position(FourthColumn, FourthRow));
+
+    for(int row = FirstRow; row <= EighthRow; row++){
+        for(int column = FirstColumn; column <= EighthColumn; column++){
+            if(GetCellState(Position((Column)column, (Row)row)) == Alive){
+                list.push_back(Position((Column)column, (Row)row));
+            }
+        }
+    }
     
     return list;
 }
 
 CellState Board::GetCellState(Position position){
-    if(setWasCalled == true){
-        return Alive;
-    }
-
-    return Dead;
+    return (rows[position.row] & (0b10000000 >> position.column)) == 0 ? Dead : Alive;
 }
 
 unsigned char Board::GetRowAsByte(Row row){
-    return this->row;
+    return rows[row];
 }

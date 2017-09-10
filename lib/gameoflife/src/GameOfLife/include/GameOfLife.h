@@ -51,7 +51,5 @@ public:
 
     unsigned char GetRowAsByte(Row row);
 private:
-    bool setWasCalled;
-
-    unsigned char row;
+    unsigned char rows[8];
 };

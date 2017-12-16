@@ -37,6 +37,7 @@ void Board::SetCellState(Position position, CellState cellState){
     }
 }
 
+/*
 std::list<Position> Board::GetLivingCellsPositions(){
     std::list<Position> list;
 
@@ -50,6 +51,7 @@ std::list<Position> Board::GetLivingCellsPositions(){
     
     return list;
 }
+*/
 
 CellState Board::GetCellState(Position position){
     return (rows[position.row] & (0b10000000 >> position.column)) == 0 ? Dead : Alive;

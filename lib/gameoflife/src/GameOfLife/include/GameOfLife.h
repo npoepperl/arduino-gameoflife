@@ -44,7 +44,7 @@ public:
 
     bool HasLivingCells();
 
-    std::list<Position> GetLivingCellsPositions();
+//    std::list<Position> GetLivingCellsPositions();
 
     void SetCellState(Position position, CellState cellState);
     CellState GetCellState(Position position);

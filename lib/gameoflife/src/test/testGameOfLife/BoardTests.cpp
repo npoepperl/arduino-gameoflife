@@ -26,6 +26,7 @@ TEST_F(BoardTests, AssertThatBoardWithLivingCellIsNotEmpty){
     ASSERT_EQ(true, board.HasLivingCells());
 }
 
+/*
 TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
     Board board = Board();
 
@@ -41,6 +42,7 @@ TEST_F(BoardTests, AssertThatOneLivingCellsPositionIsRetreivedAsList){
         ASSERT_EQ(true, position == *iter);
     }
 }
+
 
 TEST_F(BoardTests, AssertThatMultipleLivingCellsPositionsAreRetreivedAsList){
     Board board = Board();
@@ -66,6 +68,7 @@ TEST_F(BoardTests, AssertThatMultipleLivingCellsPositionsAreRetreivedAsList){
         ASSERT_TRUE(result != positions.end());
     }
 }
+*/
 
 TEST_F(BoardTests, AssertThatCellIsDead){
     Board board = Board();
